@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name's Links</title>
+    <!--<link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      body {
+         font-family: Arial, sans-serif;
+         background: url(sec.png) no-repeat center center/cover;
+         margin: 0;
+         padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+      }
+
+      .container {
+         text-align: center;
+         background-color: #d5cececf;
+         border-radius: 10px;
+         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+         padding: 20px;
+         width: 90%;
+         max-width: 440px;
+         max-height: calc(100% - 50px);
+      }
+
+      .profile {
+         margin-bottom: 20px;
+      }
+      .profile-img {
+         border-radius: 50%;
+         width: 140px;
+         height: 140px;
+         object-fit: cover;
+      }
+
+      h1 {
+         color: #333;
+         margin: 10px 0;
+         font-size: 1em;
+      }
+
+      p {
+         color: #666;
+      }
+
+      .links {
+         margin-top: 20px;
+      }
+
+      .links a {
+         display: block;
+         background-color: #767de3d5;
+         color: rgb(30, 27, 27);
+         padding: 15px;
+         margin: 10px 14px;
+         text-decoration: none;
+         border-radius: 5px;
+         transition: background-color 0.3s;
+         font-size: 18px;
+      }
+
+      .links a:hover {
+         background-color: #4f60e3da;
+         transform: scale(1.05);
+         text-decoration: none;
+      }
+
+      .links a i {
+         margin-right: 10px; /* Space between icon and text */
+      }
+      footer {
+         font-size: 16px; /* Adjust font size as needed */
+         text-align: center; /* Center the text */
+         padding: 10px; /* Add some padding */
+         background-color: transparent; /* No background color */
+         position: absolute; /* Position relative to the content */
+         bottom: 0; /* Stick to the bottom */
+         width: 100%; /* Full width */
+      }
+      
+      .footer-container {
+         display: flex; /* Use Flexbox for layout */
+         justify-content: space-around; /* Space items evenly */
+         align-items: center; /* Center items vertically */
+         padding: 0 20px; /* Add horizontal padding */
+      }
+    </style>
+</head>
+
+<body>
+   <div class="container">
+      <div class="profile">
+          <div id="profile-container"></div> <!-- Container for the profile image -->          <h1>Welcome to <strong>Krishna's</strong> link tree!</h1>
+          <h1> Here are some links to connect with me:</h1>
+      </div>
+      <div class="links" id="linkContainer"></div>
+  </div>
+  <footer class="footer-container">
+   <p> Owned by <strong>Krishna Dwivedi</strong></p>
+  </footer>
+    <!-- <script src="script.js"></script> -->
+     <script>
+      // Function to add a profile image
+      function addProfileImage() {
+         // Create an img element
+         const img = document.createElement('img');
+         
+         // Set the src and alt attributes
+         img.src = 'profile-pic.png';
+         img.alt = 'Profile Picture';
+         img.className = 'profile-img'; // Add a class for styling if needed
+
+         // Get the profile container
+         const profileContainer = document.getElementById('profile-container');
+
+         // Append the image to the profile container
+         profileContainer.appendChild(img);
+      }
+
+      // Call the function to add the profile image
+      addProfileImage();
+
+      // Array of link objects with icons
+      const links = [
+         {
+            name: "Portfolio",
+            url: "https://sudo-hope0529.github.io/portfolio/",
+            icon: "fa-folder-open"
+         },
+         {
+            name: "GitHub",
+            url: "https://github.com/sudo-hope0529",
+            icon: "fab fa-github"
+         },
+         {
+            name: "Credly",
+            url: "https://www.credly.com/users/krishna-dwivedi.a2ae4587",
+            icon: "fab fa-certificate"
+         },
+         {
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/krishna-d-3725b3308",
+            icon: "fab fa-linkedin"
+         },
+         {
+            name: "Personal Website",
+            url: "https://yourwebsite.com",
+            icon: "fas fa-globe"
+         },
+         {
+            name: "Email Me",
+            url: "mailto:hope.techdev@gmail.com",
+            icon: "fas fa-envelope"
+         }
+      ];
+
+      // Function to create link elements with icons
+      function createLinks() {
+         const linkContainer = document.getElementById('linkContainer');
+         links.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.target = "_blank";
+            
+            // Create an icon element
+            const icon = document.createElement('i');
+            icon.className = link.icon;
+
+            // Append icon and text to the link
+            a.appendChild(icon);
+            a.appendChild(document.createTextNode(` ${link.name}`)); // Add a space before the name
+            linkContainer.appendChild(a);
+         });
+      }
+
+      // Call the function to create links
+      createLinks();
+
+     </script>
+</body>
+</html>
