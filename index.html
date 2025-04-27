@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna's Link-Tree</title>
+    <title>Krishna's Hacker Hub</title>
+    <link rel="icon" type="png|image" href="linktree-icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
       body {
-         font-family: Arial, sans-serif;
-         background: url(sec.png) no-repeat center center/cover;
+         font-family: 'Courier New', Courier, monospace;
+         background: linear-gradient(to bottom, #000000, #0a0a0a);
          margin: 0;
          padding: 0;
          display: flex;
          justify-content: center;
          align-items: center;
          height: 100vh;
-          user-select: none;
+         color: #00ff00;
+         overflow: hidden;
       }
 
       .container {
          text-align: center;
-         background-color: #d5cececf;
+         background-color: rgba(0, 0, 0, 0.7);
+         border: 2px solid #00ff00;
          border-radius: 10px;
-         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+         box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
          padding: 20px;
          width: 90%;
          max-width: 440px;
          max-height: calc(100% - 50px);
+         position: relative;
+         z-index: 1;
       }
 
       .profile {
@@ -34,19 +39,27 @@
       }
       .profile-img {
          border-radius: 50%;
-         width: 140px;
-         height: 140px;
+         width: 160px;
+         height: 160px;
          object-fit: cover;
+         border: 3px solid #00ff00;
+         box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+         transition: transform 0.3s ease;
+      }
+      .profile-img:hover {
+         transform: scale(1.1);
       }
 
       h1 {
-         color: #333;
+         color: #00ff00;
          margin: 10px 0;
-         font-size: 1em;
+         font-size: 1.2em;
+         text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+         animation: glitch 1s linear infinite;
       }
 
       p {
-         color: #666;
+         color: #00cc00;
       }
 
       .links {
@@ -55,76 +68,129 @@
 
       .links a {
          display: block;
-         background-color: #767de3d5;
-         color: rgb(30, 27, 27);
+         background-color: rgba(0, 255, 0, 0.2);
+         color: #00ff00;
          padding: 15px;
          margin: 10px 14px;
          text-decoration: none;
+         border: 1px solid #00ff00;
          border-radius: 5px;
-         transition: background-color 0.3s;
+         transition: all 0.3s ease;
          font-size: 18px;
+         text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+         position: relative;
+         overflow: hidden;
       }
 
       .links a:hover {
-         background-color: #4f60e3da;
+         background-color: rgba(0, 255, 0, 0.4);
          transform: scale(1.05);
-         text-decoration: none;
+         box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+      }
+
+      .links a::after {
+         content: '>_';
+         position: absolute;
+         right: 10px;
+         color: #00ff00;
+         font-family: monospace;
+         font-size: 14px; /* Adjust size for better terminal look */
+         animation: blink 0.5s infinite;
       }
 
       .links a i {
-         margin-right: 10px; 
+         margin-right: 10px;
       }
+
       footer {
-         font-size: 16px; 
+         font-size: 14px;
          text-align: center;
-         padding: 10px; 
-         background-color: transparent; 
-         position: absolute; 
-         bottom: 0; 
-         width: 100%; 
+         padding: 10px;
+         background-color: transparent;
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         color: #00cc00;
+         text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
       }
       
       .footer-container {
-          color: #d5cececf;
-         display: flex; 
-         justify-content: space-around; 
-         align-items: center; 
-         padding: 0 20px; /
+         display: flex;
+         justify-content: space-around;
+         align-items: center;
+         padding: 0 20px;
+      }
+
+      /* Glitch Animation */
+      @keyframes glitch {
+         2%, 64% {
+            transform: translate(2px, 0) skew(0deg);
+         }
+         4%, 60% {
+            transform: translate(-2px, 0) skew(0deg);
+         }
+         62% {
+            transform: translate(0, 0) skew(5deg);
+         }
+      }
+
+      /* Blink Animation */
+      @keyframes blink {
+         0%, 100% { opacity: 0; }
+         50% { opacity: 1; }
+      }
+
+      /* Background Matrix Effect */
+      .matrix {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+         z-index: 0;
+         opacity: 0.1;
+      }
+
+      .matrix span {
+         position: absolute;
+         color: #00ff00;
+         font-size: 20px;
+         white-space: nowrap;
+         animation: matrix-fall linear infinite;
+         user-select: none;
+      }
+
+      @keyframes matrix-fall {
+         0% { top: -10%; }
+         100% { top: 110%; }
       }
     </style>
 </head>
 
 <body>
+   <div class="matrix" id="matrix"></div>
    <div class="container">
       <div class="profile">
-          <div id="profile-container"></div> 
-          <h1>Welcome to <strong>Krishna's</strong> link tree!</h1>
-          <h1> Here are some links to Krishna Aura:</h1>
+         <div id="profile-container"></div>
+         <h1>Welcome to <strong>Krishna's</strong> Hacker Hub!</h1>
+         <h1>Steal My Network Routes ></h1>
       </div>
       <div class="links" id="linkContainer"></div>
-  </div>
-  <footer class="footer-container">
-   <p> Designed & Owned by <strong>Krishna Dwivedi</strong></p>
-  </footer>
-     <script>
+   </div>
+   <footer class="footer-container">
+      <p>&copy; Hijacked by <strong>Krishna Dwivedi</strong> | System Online</p>
+   </footer>
+   <script>
       // Function to add a profile image
       function addProfileImage() {
-         // Create an img element
          const img = document.createElement('img');
-         
-         // Set the src and alt attributes
-         img.src = 'profile-pic.png';
+         img.src = 'profile-img.jpg';
          img.alt = 'Profile Picture';
-         img.className = 'profile-img'; // Add a class for styling if needed
-
-         // Get the profile container
+         img.className = 'profile-img';
          const profileContainer = document.getElementById('profile-container');
-
-         // Append the image to the profile container
          profileContainer.appendChild(img);
       }
-
-      // Call the function to add the profile image
       addProfileImage();
 
       // Array of link objects with icons
@@ -132,33 +198,33 @@
          {
             name: "Portfolio",
             url: "https://sudo-hope0529.github.io/portfolio/",
-            icon: "fa-duotone fa-solid fa-briefcase"
+            icon: "fas fa-folder-open"
          },
          {
             name: "GitHub",
             url: "https://github.com/sudo-hope0529",
             icon: "fab fa-github"
          },
-          {
-            name: "Take CC-Quiz By Krishna",
+         {
+            name: "Krishna's ISC2 CC Quiz",
             url: "https://sudo-hope0529.github.io/cc-practice-quiz/",
             icon: "fa fa-question"
-          },
+         },
          {
             name: "Credly",
             url: "https://www.credly.com/users/krishna-dwivedi.a2ae4587",
-            icon: "fa-duotone fa-solid fa-certificate"
+            icon: "fas fa-certificate"
          },
          {
             name: "LinkedIn",
             url: "https://www.linkedin.com/in/krishna-d-3725b3308",
             icon: "fab fa-linkedin"
          },
-        // {
-        //  name: "Personal Website",
-        //  url: "https://yourwebsite.com",
-        //  icon: "fas fa-globe"
-        // },
+         // {
+         //    name: "Personal Website",
+         //    url: "https://yourwebsite.com",
+         //    icon: "fas fa-globe"
+         // },
          {
             name: "Email Me",
             url: "mailto:sud0hope.techie@gmail.com",
@@ -173,21 +239,28 @@
             const a = document.createElement('a');
             a.href = link.url;
             a.target = "_blank";
-            
-            // Create an icon element
             const icon = document.createElement('i');
             icon.className = link.icon;
-
-            // Append icon and text to the link
             a.appendChild(icon);
-            a.appendChild(document.createTextNode(` ${link.name}`)); // Add a space before the name
+            a.appendChild(document.createTextNode(` ${link.name}`));
             linkContainer.appendChild(a);
          });
       }
-
-      // Call the function to create links
       createLinks();
 
-     </script>
+      // Matrix background effect
+      function createMatrixEffect() {
+         const matrix = document.getElementById('matrix');
+         for (let i = 0; i < 50; i++) {
+            const span = document.createElement('span');
+            span.textContent = Array(20).fill().map(() => String.fromCharCode(33 + Math.random() * 94)).join('');
+            span.style.left = `${Math.random() * 100}%`;
+            span.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            span.style.animationDelay = `${Math.random() * 5}s`;
+            matrix.appendChild(span);
+         }
+      }
+      createMatrixEffect();
+   </script>
 </body>
 </html>
